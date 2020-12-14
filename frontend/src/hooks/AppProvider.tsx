@@ -1,7 +1,7 @@
 import React, { createContext, useMemo, useEffect } from "react";
 import { of } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { FirebaseService, WebService } from "../services";
+import { FirebaseService, Web3Service, WebService } from "../services";
 import { setSelectedBusinessStripeAccountId } from "../config";
 import { loadStripe } from "@stripe/stripe-js";
 import { useHistory, useLocation } from "react-router-dom";
@@ -13,6 +13,7 @@ const actionInitialValue = {
   searchBusinesses: (searchText: string, backupBusinesses: any[]) => {},
   googleSignIn: (type: string) => {},
   facebookSignIn: (type: string) => {},
+  idxSignIn: (type: string) => {},
   selectBusiness: (selectedBusiness: any) => {},
   fetchAllBusinesses: () => {},
   getFixedClrMatchingAmount: (allMatchingArrays: Array<any>) => {},
@@ -281,6 +282,17 @@ export const AppProvider = (props: any) => {
               }
             });
           // }
+          dispatch({ type: "TOGGLE_MODAL", openModal: false, modalConfig: {} });
+        } catch (err) {
+          console.error(err);
+        }
+      },
+      idxSignIn: async (type: string) => {
+        try {
+          await Web3Service.login();
+          const { idx } = await Web3Service.openIDXSpace();
+          // eslint-disable-next-line
+          console.log(idx)
           dispatch({ type: "TOGGLE_MODAL", openModal: false, modalConfig: {} });
         } catch (err) {
           console.error(err);

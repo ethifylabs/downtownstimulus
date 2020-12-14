@@ -22,6 +22,30 @@
   }
 }
 
+.login-idx-button-container {
+  .login-idx-button {
+    width: 100%;
+    background: #7b3efe;
+    color: var(--whiteColor);
+    border: 1px solid #7b3efe;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 29px;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+    outline: none;
+    &:active {
+      background: darken(#7b3efe, 10);
+    }
+    &:hover {
+      background: darken(#7b3efe, 5);
+    }
+  }
+}
+
 .login-google-button-container {
   .login-google-button {
     width: 100%;
