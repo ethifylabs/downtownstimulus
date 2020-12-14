@@ -35,8 +35,21 @@ export const openIDXSpace = async () => {
       const ceramic = new Ceramic("https://ceramic-dev.3boxlabs.com");
       await ceramic.setDIDProvider(didProvider as any);
       const idx = createIDX(ceramic);
-
-      return { idx };
+      // await idx.set("basicProfile", {
+      //   first_name: "Manank",
+      //   last_name: "Patni",
+      //   email: "manank321@gmail.com",
+      //   photoURL:
+      //     "https://lh6.googleusercontent.com/-Mm-pQAfOvPw/AAAAAAAAAAI/AAAAAAAAAKo/AMZuucl50dhPbFez9dOwU1TOVenzVlOB_w/photo.jpg",
+      //   emailVerified: "true",
+      //   phoneNumber: "null",
+      // });
+      const user = await idx.get("basicProfile");
+      user["idxId"] = idx.id;
+      if (user) {
+        return { user };
+      }
+      return null;
     }
     throw new Error("No web3 provider available");
   } catch (error) {

@@ -290,10 +290,20 @@ export const AppProvider = (props: any) => {
       idxSignIn: async (type: string) => {
         try {
           await Web3Service.login();
-          const { idx } = await Web3Service.openIDXSpace();
+          const { user } = await Web3Service.openIDXSpace();
           // eslint-disable-next-line
-          console.log(idx)
           dispatch({ type: "TOGGLE_MODAL", openModal: false, modalConfig: {} });
+          if (user) {
+            sessionStorage.setItem("user", JSON.stringify(user));
+            dispatch({
+              type: "SET_USER",
+              user,
+            });
+          } else {
+            alert.error(
+              "The IDX BasicProfile doesnt have User Details, Email and Name Needed",
+            );
+          }
         } catch (err) {
           console.error(err);
         }

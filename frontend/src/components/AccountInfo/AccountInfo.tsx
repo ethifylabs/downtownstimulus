@@ -9,6 +9,7 @@ function AccountInfo() {
   const [lastName, setLastName] = useState(user.last_name);
   const [email, setEmail] = useState(user.email);
   const [phoneNumber, setPhoneNumber] = useState(user.phone_number);
+  const [idxId] = useState(user.idxId);
 
   const saveUpdatedUser = () => {
     const updatedUser = {
@@ -65,6 +66,17 @@ function AccountInfo() {
             onChange={(e) => setPhoneNumber(e.target.value)}
           />
         </div>
+        {idxId ? (
+          <div className="top-margin-set bottom-margin-set account-info-form-element-container">
+            <p>IDX DID</p>
+            <input
+              type="text"
+              disabled
+              className="account-info-form-element"
+              value={idxId}
+            />
+          </div>
+        ) : null}
         <div className="top-margin-set bottom-margin-set account-info-form-element-container">
           <button className="save-button" onClick={saveUpdatedUser}>
             Save

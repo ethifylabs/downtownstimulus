@@ -53,7 +53,7 @@ export const signInSocial = async (pType: string) => {
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
     // eslint-disable-next-line
-    console.log(errorCode, errorMessage, email, credential)
+    console.log(errorCode, errorMessage, email, credential);
   }
 };
 
